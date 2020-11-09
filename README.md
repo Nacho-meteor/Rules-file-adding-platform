@@ -1,2 +1,2 @@
-# Rules-file-adding-platform
+# uos-device-adapter
 User add rule file
