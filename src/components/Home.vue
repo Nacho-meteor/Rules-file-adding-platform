@@ -45,30 +45,30 @@
                 <!-- 侧边栏导航 -->
                 <el-aside width="200px" class="aside">
                         <div>
-                          <div @click="Agencyshow" class="tittle">
-                            <span>相关文档</span><span v-show='!showAgency'>∨</span><span v-show="showAgency">∧</span>
+                          <div @click="Documentationshow" class="tittle">
+                            <span>相关文档</span><span v-show='!showDocumentation'>∨</span><span v-show="showDocumentation">∧</span>
                           </div>
-                          <div v-show="showAgency">
+                          <div v-show="showDocumentation">
                             <div>
                               <router-link v-bind:class="this.$route.path=='/rulesDocumentation'?'routerActive':'router'" to="/rulesDocumentation">规则文件编写规范</router-link>
                             </div>
                           </div>
                         </div>
                         <div>
-                          <div @click="Financialshow" class="tittle">
-                            <span>注意事项</span><span v-show='!showFinancial'>∨</span><span v-show="showFinancial">∧</span>
+                          <div @click="Warrningshow" class="tittle">
+                            <span>注意事项</span><span v-show='!showWarrning'>∨</span><span v-show="showWarrning">∧</span>
                           </div>
-                          <div v-show="showFinancial">
+                          <div v-show="showWarrning">
                             <div>
-                              <router-link v-bind:class="this.$route.path=='/precautions'?'routerActive':'router'" to="/precautions">规范添加注意事项</router-link>
+                              <router-link v-bind:class="this.$route.path=='/precautions'?'routerActive':'router'" to="/precautions">文件添加注意事项</router-link>
                             </div>
                           </div>
                         </div>
                         <div>
-                          <div @click="Runshow" class="tittle">
-                            <span>添加入口</span><span v-show='!showRun'>∨</span><span v-show="showRun">∧</span>
+                          <div @click="Entryshow" class="tittle">
+                            <span>添加入口</span><span v-show='!showEntry'>∨</span><span v-show="showEntry">∧</span>
                           </div>
-                          <div v-show="showRun">
+                          <div v-show="showEntry">
                             <div>
                               <router-link v-bind:class="this.$route.path=='/addEntry'?'routerActive':'router'" to="/addEntry">规则文件添加</router-link>
                             </div>
@@ -96,11 +96,9 @@ export default {
   data() {
     return {
       account: "1100", //登录账户
-      maxLimit: "3000", //该账户的上限额度
-      lastLimit: "2000", //该账户的剩余额度
-      showAgency: false, //显示代理事务
-      showFinancial: false, //显示代理事务
-      showRun: false //显示代理事务
+      showDocumentation: false, //只显示模范文档
+      showWarrning: false, //只显示注意事项
+      showEntry: false //只显示入口地址
     };
   },
   created() {
@@ -108,12 +106,6 @@ export default {
     this.account = sessionStorage.getItem("account")
       ? sessionStorage.getItem("account")
       : this.account;
-    this.maxLimit = sessionStorage.getItem("maxLimit")
-      ? sessionStorage.getItem("maxLimit")
-      : this.maxLimit;
-    this.lastLimit = sessionStorage.getItem("lastLimit")
-      ? sessionStorage.getItem("lastLimit")
-      : this.lastLimit;
   },
   methods: {
     // 左侧导航栏---------------------------------------
@@ -127,23 +119,23 @@ export default {
       // console.log(index,indexPath)
     },
     // 左侧导航栏结束-----------------------
-    // 只显示代理事物
-    Agencyshow() {
-      this.showAgency = !this.showAgency;
-      this.showFinancial = false;
-      this.showRun = false;
+    // 只显示模范文档
+    Documentationshow() {
+      this.showDocumentation = !this.showDocumentation;
+      this.showWarrning = false;
+      this.showEntry = false;
     },
-    // 只显示财务报表
-    Financialshow() {
-      this.showFinancial = !this.showFinancial;
-      this.showAgency = false;
-      this.showRun = false;
+    // 只显示注意事项
+    Warrningshow() {
+      this.showWarrning = !this.showWarrning;
+      this.showDocumentation = false;
+      this.showEntry = false;
     },
-    // 只显示运营数据
-    Runshow() {
-      this.showRun = !this.showRun;
-      this.showAgency = false;
-      this.showFinancial = false;
+    // 只显示入口地址
+    Entryshow() {
+      this.showEntry = !this.showEntry;
+      this.showDocumentation = false;
+      this.showWarrning = false;
     },
     // 点击主页，前往主页面
     toMain(){
